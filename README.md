@@ -1,0 +1,1 @@
+# squad1-serverest-automacao
