@@ -2,14 +2,15 @@
 import { faker } from '@faker-js/faker';
 
 describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => {
+       beforeEach(() => {
+       cy.visit('https://front.serverest.dev/cadastrarusuarios');
+       })
+
     it('CT01-001 - Cadastro de usuários comum com informações válidas', () => {
        //Gerar dados aleatórios
-       const nome = faker.internet.username();
-       const email = faker.internet.email();
-       const senha = faker.internet.password(10, true, /[z0-9]/, 'Avanti@');
-
-        //Pré Condições
-        cy.visit('https://front.serverest.dev/cadastrarusuarios');
+       const nome = faker.internet.username({firstName: 'Avanti'});
+       const email = faker.internet.email({firstName: 'Avanti', provider: 'squad01.avanti.dev'});
+       const senha = faker.internet.password({length: 10, memorable:true, pattern: /[A-Z][0-9]/, prefix: 'Avanti@'});
 
        //Dados de entrada & Passo a Passo
        cy.get('input[id="nome"]').type(nome);
@@ -18,14 +19,12 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
        cy.get('button[data-testid="cadastrar"]').click();
 
        //Resultado Esperado: Usuário deve ser logado e direcionado para Home Page de usuário comum
-       cy.wait(3000);
-       cy.url().should('eq', 'https://front.serverest.dev/home');  
+       cy.wait(4000);
+       cy.url().should('eq', 'https://front.serverest.dev/home'); 
     });
 
    it('CT01-002 - Cadastro de usuários sem preencher campos obrigatórios', () => {
-       //Pré Condições
-       cy.visit('https://front.serverest.dev/cadastrarusuarios');
-
+ 
        //Dados de entrada & Passo a Passo
        cy.get('button[data-testid="cadastrar"]').click();
 
@@ -38,12 +37,9 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
 
    it('CT01-003 Cadastro de usuário com e-mail inválido', () => {
        //Gerar dados aleatórios
-       const nome = faker.internet.username();
+       const nome = faker.internet.username({firstName: 'Avanti'});
        const emailInvalido = 'emailinvalido-outlook.com';
-       const senha = faker.internet.password(10, true, /[z0-9]/, 'Avanti@');
-
-       //Pré Condições
-       cy.visit('https://front.serverest.dev/cadastrarusuarios');
+       const senha = faker.internet.password({length: 10, memorable:true, pattern: /[A-Z][0-9]/, prefix: 'Avanti@'});
 
        //Dados de entrada & Passo a Passo
        cy.get('input[id="nome"]').type(nome);
@@ -62,12 +58,9 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
 
    it('CT01-004 Cadastro de usuário com senha fraca', () => {
        //Gerar dados aleatórios
-       const nome = faker.internet.username();
-       const email = faker.internet.email();
+       const nome = faker.internet.username({firstName: 'Avanti'});
+       const senha = faker.internet.password({length: 10, memorable:true, pattern: /[A-Z][0-9]/, prefix: 'Avanti@'});
        const senhaFraca = '123';
-
-       //Pré Condições
-       cy.visit('https://front.serverest.dev/cadastrarusuarios');
 
        //Dados de entrada & Passo a Passo
        cy.get('input[id="nome"]').type(nome);
@@ -81,12 +74,9 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
 
    it('CT01-005 - Cadastro de usuário como administrador', () => {
        //Gerar dados aleatórios
-       const nome = faker.internet.username();
-       const email = faker.internet.email();
-       const senha = faker.internet.password(10, true, /[z0-9]/, 'Avanti@');
-
-       //Pré Condições
-       cy.visit('https://front.serverest.dev/cadastrarusuarios');
+       const nome = faker.internet.username({firstName: 'Avanti'});
+       const email = faker.internet.email({firstName: 'Avanti', provider: 'squad01.avanti.dev'});
+       const senha = faker.internet.password({length: 10, memorable:true, pattern: /[A-Z][0-9]/, prefix: 'Avanti@'});
 
        //Dados de entrada & Passo a Passo
        cy.get('input[id="nome"]').type(nome);
@@ -103,12 +93,11 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
 
    it('CT01-006 Cadastro de usuário com e-mail já existente', () => {
        //Gerar dados aleatórios
-       const nome = faker.internet.username();
-       const emailDuplicado = faker.internet.email();
-       const senha = faker.internet.password(10, true, /[z0-9]/, 'Avanti@');
+       const nome = faker.internet.username({firstName: 'Avanti'});
+       const emailDuplicado = faker.internet.email({firstName: 'Avanti', provider: 'squad01.avanti.dev'});
+       const senha = faker.internet.password({length: 10, memorable:true, pattern: /[A-Z][0-9]/, prefix: 'Avanti@'});
 
        // Pré-requisito: Cadastro do usuário
-       cy.visit('https://front.serverest.dev/cadastrarusuarios');
        cy.get('input[id="nome"]').type(nome);
        cy.get('input[id="email"]').type(emailDuplicado);
        cy.get('input[id="password"]').type(senha);
