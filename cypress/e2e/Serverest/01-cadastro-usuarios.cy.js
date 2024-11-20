@@ -2,7 +2,7 @@
 import { faker } from '@faker-js/faker';
 
 describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => {
-    it.skip('CT01-001 - Cadastro de usuários comum com informações válidas', () => {
+    it('CT01-001 - Cadastro de usuários comum com informações válidas', () => {
        //Gerar dados aleatórios
        const nome = faker.internet.username();
        const email = faker.internet.email();
@@ -19,9 +19,10 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
 
        //Resultado Esperado: Usuário deve ser logado e direcionado para Home Page de usuário comum
        cy.wait(3000);
-       cy.url().should('eq', 'https://front.serverest.dev/home');      
+       cy.url().should('eq', 'https://front.serverest.dev/home');  
     });
-   it.skip('CT01-002 - Cadastro de usuários sem preencher campos obrigatórios', () => {
+
+   it('CT01-002 - Cadastro de usuários sem preencher campos obrigatórios', () => {
        //Pré Condições
        cy.visit('https://front.serverest.dev/cadastrarusuarios');
 
@@ -55,7 +56,7 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
        cy.contains('Inclua um "@" no endereço de e-mail.').should('be.visible');   
     });
 
-   it.skip('CT01-004 Cadastro de usuário com senha fraca', () => {
+   it('CT01-004 Cadastro de usuário com senha fraca', () => {
        //Gerar dados aleatórios
        const nome = faker.internet.username();
        const email = faker.internet.email();
@@ -71,10 +72,10 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
        cy.get('button[data-testid="cadastrar"]').click();
 
        //Resultado Esperado: O sistema deve destacar o campo “senha” com a mensagem “senha fraca”
-       cy.get('.error-message').should('contain', 'senha fraca');      
+       cy.get('.alert').contains('Senha Fraca').should('be.visible');  
     });
 
-   it.skip('CT01-005 - Cadastro de usuário como administrador', () => {
+   it('CT01-005 - Cadastro de usuário como administrador', () => {
        //Gerar dados aleatórios
        const nome = faker.internet.username();
        const email = faker.internet.email();
@@ -91,11 +92,12 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
        cy.get('button[data-testid="cadastrar"]').click();
 
        //Resultado Esperado: Usuário deve ser logado e direcionado para Home Page de usuário Administrador
+       cy.wait(3000);
        cy.url().should('eq', 'https://front.serverest.dev/admin/home');     
+       cy.contains(nome).should('be.visible');
     });
 
-
-   it.skip('CT01-006 Cadastro de usuário com e-mail já existente', () => {
+   it('CT01-006 Cadastro de usuário com e-mail já existente', () => {
        //Gerar dados aleatórios
        const nome = faker.internet.username();
        const emailDuplicado = faker.internet.email();
@@ -106,17 +108,21 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
        cy.get('input[id="nome"]').type(nome);
        cy.get('input[id="email"]').type(emailDuplicado);
        cy.get('input[id="password"]').type(senha);
-       cy.get('#customerForm').submit();
+       cy.get('button[data-testid="cadastrar"]').click();
+       cy.wait(3000);
        cy.url().should('eq', 'https://front.serverest.dev/home');
        cy.get('button[data-testid="logout"]').click();
 
        //Dados de entrada & Passo a Passo
-       cy.get('input[id="nome"]').type('Usuário Teste');
+       cy.wait(3000);
+       cy.visit('https://front.serverest.dev/cadastrarusuarios');
+       cy.get('input[id="nome"]').type(nome);
        cy.get('input[id="email"]').type(emailDuplicado);
        cy.get('input[id="password"]').type(senha);
-       cy.get('#customerForm').submit();
+       cy.get('button[data-testid="cadastrar"]').click();
 
        //Resultado Esperado: O sistema deve informar que “Este e-mail já está sendo usado”.
-       cy.get('.error-message').should('contain', 'Este e-mail já está sendo usado');      
+       cy.wait(3000);
+       cy.get('.alert').contains('Este email já está sendo usado').should('be.visible');    
     });
 });
