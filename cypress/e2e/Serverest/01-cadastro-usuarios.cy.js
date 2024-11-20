@@ -53,7 +53,11 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
 
        //Resultado Esperado: O sistema deve exibir mensagem indicando “falta um @ no endereço de e-mail...”
        cy.wait(3000);
-       cy.contains('Inclua um "@" no endereço de e-mail.').should('be.visible');   
+       cy.get('input[id="email"]')
+        .then((input) => {
+            const validationMessage = input[0].validationMessage;
+            expect(validationMessage).to.include('Inclua um "@" no endereço de e-mail');
+        }); 
     });
 
    it('CT01-004 Cadastro de usuário com senha fraca', () => {
