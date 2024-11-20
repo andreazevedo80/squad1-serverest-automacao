@@ -59,7 +59,7 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
    it('CT01-004 Cadastro de usuário com senha fraca', () => {
        //Gerar dados aleatórios
        const nome = faker.internet.username({firstName: 'Avanti'});
-       const senha = faker.internet.password({length: 10, memorable:true, pattern: /[A-Z][0-9]/, prefix: 'Avanti@'});
+       const email = faker.internet.email({firstName: 'Avanti', provider: 'squad01.avanti.dev'});
        const senhaFraca = '123';
 
        //Dados de entrada & Passo a Passo
