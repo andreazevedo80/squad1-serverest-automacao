@@ -27,7 +27,7 @@ describe('Cenário: Verificar a funcionalidade do Login', () => {
        cy.wait(2000);
     })
 
-    it('CT02-001 Login com credenciais corretas', () => {
+    it('CT02-001 - Login com credenciais corretas', () => {
 
        //Dados de entrada & Passo a Passo
        cy.get('input[id="email"]').type(email);
@@ -39,7 +39,7 @@ describe('Cenário: Verificar a funcionalidade do Login', () => {
        cy.url().should('eq', 'https://front.serverest.dev/home');    
     });
 
-    it('CT02-002 Login com credenciais incorretas', () => {
+    it('CT02-002 - Login com credenciais incorretas', () => {
        const senhainvalida = 'senhainvalida';
 
        //Dados de entrada & Passo a Passo
@@ -52,7 +52,7 @@ describe('Cenário: Verificar a funcionalidade do Login', () => {
        cy.get('.alert').contains('Email e/ou senha inválidos').should('be.visible');
     });
 
-   it('CT02-004 Login com campo de e-mail vazio', () => {
+   it('CT02-004 - Login com campo de e-mail vazio', () => {
 
        //Dados de entrada & Passo a Passo
        cy.get('input[id="password"]').type(senha);
@@ -63,7 +63,7 @@ describe('Cenário: Verificar a funcionalidade do Login', () => {
        cy.get('.alert').contains('Email é obrigatório').should('be.visible');  
     });
 
-   it('CT02-005 Login com campo de senha vazio', () => {
+   it('CT02-005 - Login com campo de senha vazio', () => {
 
        //Dados de entrada & Passo a Passo
        cy.get('input[id="email"]').type(email);
@@ -74,7 +74,7 @@ describe('Cenário: Verificar a funcionalidade do Login', () => {
        cy.get('.alert').contains('Password é obrigatório').should('be.visible');   
     });
 
-   it('CT02-006 Login com e-mail inválido', () => {
+   it('CT02-006 - Login com e-mail inválido', () => {
        const emailInvalido = 'emailinvalido@emailinvalido.com.br';
 
        //Dados de entrada & Passo a Passo

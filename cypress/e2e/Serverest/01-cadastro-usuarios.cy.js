@@ -35,7 +35,7 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
        cy.get('.alert').contains('Password é obrigatório').should('be.visible');
     });
 
-   it('CT01-003 Cadastro de usuário com e-mail inválido', () => {
+   it('CT01-003 - Cadastro de usuário com e-mail inválido', () => {
        //Gerar dados aleatórios
        const nome = faker.internet.username({firstName: 'Avanti'});
        const emailInvalido = 'emailinvalido-outlook.com';
@@ -56,7 +56,7 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
         }); 
     });
 
-   it('CT01-004 Cadastro de usuário com senha fraca', () => {
+   it('CT01-004 - Cadastro de usuário com senha fraca', () => {
        //Gerar dados aleatórios
        const nome = faker.internet.username({firstName: 'Avanti'});
        const email = faker.internet.email({firstName: 'Avanti', provider: 'squad01.avanti.dev'});
@@ -82,7 +82,7 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
        cy.get('input[id="nome"]').type(nome);
        cy.get('input[id="email"]').type(email);
        cy.get('input[id="password"]').type(senha);
-       cy.get('#administrador').check(); // Marca como administrador
+       cy.get('#administrador').check();
        cy.get('button[data-testid="cadastrar"]').click();
 
        //Resultado Esperado: Usuário deve ser logado e direcionado para Home Page de usuário Administrador
@@ -91,7 +91,7 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
        cy.contains(nome).should('be.visible');
     });
 
-   it('CT01-006 Cadastro de usuário com e-mail já existente', () => {
+   it('CT01-006 - Cadastro de usuário com e-mail já existente', () => {
        //Gerar dados aleatórios
        const nome = faker.internet.username({firstName: 'Avanti'});
        const emailDuplicado = faker.internet.email({firstName: 'Avanti', provider: 'squad01.avanti.dev'});
