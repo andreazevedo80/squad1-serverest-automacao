@@ -1,9 +1,10 @@
 // Importar o Faker.js
 import { faker } from '@faker-js/faker';
+import cypressConfig from '../../../cypress.config';
 
 describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => {
        beforeEach(() => {
-       cy.visit('https://front.serverest.dev/cadastrarusuarios');
+       cy.visit('/cadastrarusuarios');
        })
 
     it('CT01-001 - Cadastro de usuários comum com informações válidas', () => {
@@ -20,7 +21,7 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
 
        //Resultado Esperado: Usuário deve ser logado e direcionado para Home Page de usuário comum
        cy.wait(4000);
-       cy.url().should('eq', 'https://front.serverest.dev/home'); 
+       cy.url().should('eq', `${Cypress.config('baseUrl')}/home`); 
     });
 
    it('CT01-002 - Cadastro de usuários sem preencher campos obrigatórios', () => {
@@ -87,7 +88,7 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
 
        //Resultado Esperado: Usuário deve ser logado e direcionado para Home Page de usuário Administrador
        cy.wait(3000);
-       cy.url().should('eq', 'https://front.serverest.dev/admin/home');     
+       cy.url().should('eq', `${Cypress.config('baseUrl')}/admin/home`);
        cy.contains(nome).should('be.visible');
     });
 
@@ -103,12 +104,12 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
        cy.get('input[id="password"]').type(senha);
        cy.get('button[data-testid="cadastrar"]').click();
        cy.wait(3000);
-       cy.url().should('eq', 'https://front.serverest.dev/home');
+       cy.url().should('eq', `${Cypress.config('baseUrl')}/home`);
        cy.get('button[data-testid="logout"]').click();
 
        //Dados de entrada & Passo a Passo
        cy.wait(3000);
-       cy.visit('https://front.serverest.dev/cadastrarusuarios');
+       cy.visit('/cadastrarusuarios');
        cy.get('input[id="nome"]').type(nome);
        cy.get('input[id="email"]').type(emailDuplicado);
        cy.get('input[id="password"]').type(senha);

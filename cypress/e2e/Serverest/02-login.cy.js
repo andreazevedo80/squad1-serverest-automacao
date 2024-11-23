@@ -12,18 +12,18 @@ describe('Cenário: Verificar a funcionalidade do Login', () => {
        email = faker.internet.email({firstName: 'Avanti', provider: 'squad01.avanti.dev'});
        senha = faker.internet.password({length: 10, memorable:true, pattern: /[A-Z][0-9]/, prefix: 'Avanti@'});
     
-       cy.visit('https://front.serverest.dev/cadastrarusuarios');
+       cy.visit('/cadastrarusuarios');
        cy.get('input[id="nome"]').type(nome);
        cy.get('input[id="email"]').type(email);
        cy.get('input[id="password"]').type(senha);
        cy.get('button[data-testid="cadastrar"]').click();
        cy.wait(3000);
-       cy.url().should('eq', 'https://front.serverest.dev/home');
+       cy.url().should('eq', `${Cypress.config('baseUrl')}/home`);
        cy.get('button[data-testid="logout"]').click();
     })
     beforeEach(() => {
        cy.wait(2000);
-       cy.visit('https://front.serverest.dev/login');
+       cy.visit('/login');
        cy.wait(2000);
     })
 
@@ -36,7 +36,7 @@ describe('Cenário: Verificar a funcionalidade do Login', () => {
 
        //Resultado Esperado: O usuário deve logar e ser direcionado para Home Page
        cy.wait(4000);
-       cy.url().should('eq', 'https://front.serverest.dev/home');    
+       cy.url().should('eq', `${Cypress.config('baseUrl')}/home`);    
     });
 
     it('CT02-002 - Login com credenciais incorretas', () => {
