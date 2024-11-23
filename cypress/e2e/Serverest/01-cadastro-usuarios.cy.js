@@ -14,7 +14,8 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
        const senha = faker.internet.password({length: 10, memorable:true, pattern: /[A-Z][0-9]/, prefix: 'Avanti@'});
 
        //Dados de entrada & Passo a Passo
-       cy.get('input[id="nome"]').type(nome);
+       cy.typeNome(nome);
+       //cy.get('input[id="nome"]').type(nome);
        cy.get('input[id="email"]').type(email);
        cy.get('input[id="password"]').type(senha);
        cy.get('button[data-testid="cadastrar"]').click();
