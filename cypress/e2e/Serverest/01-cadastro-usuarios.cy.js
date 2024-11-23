@@ -15,7 +15,6 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
 
        //Dados de entrada & Passo a Passo
        cy.typeNome(nome);
-       //cy.get('input[id="nome"]').type(nome);
        cy.get('input[id="email"]').type(email);
        cy.get('input[id="password"]').type(senha);
        cy.get('button[data-testid="cadastrar"]').click();
@@ -44,7 +43,7 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
        const senha = faker.internet.password({length: 10, memorable:true, pattern: /[A-Z][0-9]/, prefix: 'Avanti@'});
 
        //Dados de entrada & Passo a Passo
-       cy.get('input[id="nome"]').type(nome);
+       cy.typeNome(nome);
        cy.get('input[id="email"]').type(emailInvalido);
        cy.get('input[id="password"]').type(senha);
        cy.get('button[data-testid="cadastrar"]').click();
@@ -65,7 +64,7 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
        const senhaFraca = '123';
 
        //Dados de entrada & Passo a Passo
-       cy.get('input[id="nome"]').type(nome);
+       cy.typeNome(nome);
        cy.get('input[id="email"]').type(email);
        cy.get('input[id="password"]').type(senhaFraca);
        cy.get('button[data-testid="cadastrar"]').click();
@@ -81,7 +80,7 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
        const senha = faker.internet.password({length: 10, memorable:true, pattern: /[A-Z][0-9]/, prefix: 'Avanti@'});
 
        //Dados de entrada & Passo a Passo
-       cy.get('input[id="nome"]').type(nome);
+       cy.typeNome(nome);
        cy.get('input[id="email"]').type(email);
        cy.get('input[id="password"]').type(senha);
        cy.get('#administrador').check();
@@ -100,7 +99,7 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
        const senha = faker.internet.password({length: 10, memorable:true, pattern: /[A-Z][0-9]/, prefix: 'Avanti@'});
 
        // Pré-requisito: Cadastro do usuário
-       cy.get('input[id="nome"]').type(nome);
+       cy.typeNome(nome);
        cy.get('input[id="email"]').type(emailDuplicado);
        cy.get('input[id="password"]').type(senha);
        cy.get('button[data-testid="cadastrar"]').click();
@@ -111,7 +110,7 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
        //Dados de entrada & Passo a Passo
        cy.wait(3000);
        cy.visit('/cadastrarusuarios');
-       cy.get('input[id="nome"]').type(nome);
+       cy.typeNome(nome);
        cy.get('input[id="email"]').type(emailDuplicado);
        cy.get('input[id="password"]').type(senha);
        cy.get('button[data-testid="cadastrar"]').click();

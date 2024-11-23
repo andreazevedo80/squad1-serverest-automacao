@@ -13,7 +13,7 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Produtos', () => {
        senha = faker.internet.password({length: 10, memorable:true, pattern: /[A-Z][0-9]/, prefix: 'Avanti@'});
 
        cy.visit('/cadastrarusuarios');
-       cy.get('input[id="nome"]').type(nome);
+       cy.typeNome(nome);
        cy.get('input[id="email"]').type(email);
        cy.get('input[id="password"]').type(senha);
        cy.get('#administrador').check();
