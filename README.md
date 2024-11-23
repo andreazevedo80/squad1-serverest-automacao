@@ -38,6 +38,10 @@ Utilizamos o Cypress como ferramenta de automação de testes (O Cypress foi esc
 - Utilizamos a biblioteca Faker.js para gerar dados dinâmicos, como nomes, e-mails e senhas, evitando conflitos ao rodar os testes múltiplas vezes.
 - **Benefícios**: Tornou os testes mais independentes.
 
+**5. Upload de Arquivos**
+- Implementamos o recurso de upload de arquivos
+- **Beneficios**: Permitimos a automatização de testes que envolvem envio de arquivos, como imagens, garantindo a cobertura total dessas funcionalidades.
+
 ---
 
 ## Pré-requisitos
