@@ -66,7 +66,7 @@ No Cypress, navegue até o diretório e2e/everest e selecione os seguintes arqui
 
 - 01-cadastro-usuarios.cy.js
 - 02-login.cy.js
-- 03-cadastro-produto.cy.js
+- 04-cadastro-produto.cy.js
 
 ### 5. Executar os testes
 Escolha o navegador desejado e clique para iniciar os testes.
