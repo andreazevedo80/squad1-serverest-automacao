@@ -12,20 +12,20 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Produtos', () => {
        email = faker.internet.email({firstName: 'Avanti', provider: 'squad01.avanti.dev'});
        senha = faker.internet.password({length: 10, memorable:true, pattern: /[A-Z][0-9]/, prefix: 'Avanti@'});
 
-       cy.visit('https://front.serverest.dev/cadastrarusuarios');
+       cy.visit('/cadastrarusuarios');
        cy.get('input[id="nome"]').type(nome);
        cy.get('input[id="email"]').type(email);
        cy.get('input[id="password"]').type(senha);
        cy.get('#administrador').check();
        cy.get('button[data-testid="cadastrar"]').click();
        cy.wait(3000);
-       cy.url().should('eq', 'https://front.serverest.dev/admin/home');
+       cy.url().should('eq', `${Cypress.config('baseUrl')}/admin/home`);
        cy.get('button[data-testid="logout"]').click();
     })
 
     beforeEach(() => {
        cy.wait(2000);
-       cy.visit('https://front.serverest.dev/login');
+       cy.visit('/login');
        cy.wait(2000);
        cy.get('input[id="email"]').type(email);
        cy.get('input[id="password"]').type(senha);
@@ -52,7 +52,7 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Produtos', () => {
 
        //Resultado Esperado
        cy.wait(3000);
-       cy.url().should('eq', 'https://front.serverest.dev/admin/listarprodutos');
+       cy.url().should('eq', `${Cypress.config('baseUrl')}/admin/listarprodutos`);
        cy.wait(1000);
        cy.contains(nomeProduto).should('be.visible');
     });
@@ -122,7 +122,7 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Produtos', () => {
        cy.get('input[id="quantity"]').type(quantidade);
        cy.get('button[data-testid="cadastarProdutos"]').click();
        cy.wait(3000);
-       cy.url().should('eq', 'https://front.serverest.dev/admin/listarprodutos');
+       cy.url().should('eq', `${Cypress.config('baseUrl')}/admin/listarprodutos`);
        cy.wait(1000);
        cy.contains(nomeProduto).should('be.visible');
        cy.wait(1000);
