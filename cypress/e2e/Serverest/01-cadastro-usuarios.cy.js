@@ -15,9 +15,9 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
 
        //Dados de entrada & Passo a Passo
        cy.typeNome(nome);
-       cy.get('input[id="email"]').type(email);
-       cy.get('input[id="password"]').type(senha);
-       cy.get('button[data-testid="cadastrar"]').click();
+       cy.typeEmail(email);
+       cy.typePassword(senha);
+       cy.clickCadastrar();
 
        //Resultado Esperado: Usuário deve ser logado e direcionado para Home Page de usuário comum
        cy.wait(4000);
@@ -44,9 +44,9 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
 
        //Dados de entrada & Passo a Passo
        cy.typeNome(nome);
-       cy.get('input[id="email"]').type(emailInvalido);
-       cy.get('input[id="password"]').type(senha);
-       cy.get('button[data-testid="cadastrar"]').click();
+       cy.typeEmail(emailInvalido);
+       cy.typePassword(senha);
+       cy.clickCadastrar();
 
        //Resultado Esperado: O sistema deve exibir mensagem indicando “falta um @ no endereço de e-mail...”
        cy.wait(3000);
@@ -65,9 +65,9 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
 
        //Dados de entrada & Passo a Passo
        cy.typeNome(nome);
-       cy.get('input[id="email"]').type(email);
-       cy.get('input[id="password"]').type(senhaFraca);
-       cy.get('button[data-testid="cadastrar"]').click();
+       cy.typeEmail(email);
+       cy.typePassword(senhaFraca);
+       cy.clickCadastrar();
 
        //Resultado Esperado: O sistema deve destacar o campo “senha” com a mensagem “senha fraca”
        cy.get('.alert').contains('Senha Fraca').should('be.visible');  
@@ -81,10 +81,10 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
 
        //Dados de entrada & Passo a Passo
        cy.typeNome(nome);
-       cy.get('input[id="email"]').type(email);
-       cy.get('input[id="password"]').type(senha);
+       cy.typeEmail(email);
+       cy.typePassword(senha);
        cy.get('#administrador').check();
-       cy.get('button[data-testid="cadastrar"]').click();
+       cy.clickCadastrar();
 
        //Resultado Esperado: Usuário deve ser logado e direcionado para Home Page de usuário Administrador
        cy.wait(3000);
@@ -100,9 +100,9 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
 
        // Pré-requisito: Cadastro do usuário
        cy.typeNome(nome);
-       cy.get('input[id="email"]').type(emailDuplicado);
-       cy.get('input[id="password"]').type(senha);
-       cy.get('button[data-testid="cadastrar"]').click();
+       cy.typeEmail(emailDuplicado);
+       cy.typePassword(senha);
+       cy.clickCadastrar();
        cy.wait(3000);
        cy.url().should('eq', `${Cypress.config('baseUrl')}/home`);
        cy.get('button[data-testid="logout"]').click();
@@ -111,9 +111,9 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Usuários', () => 
        cy.wait(3000);
        cy.visit('/cadastrarusuarios');
        cy.typeNome(nome);
-       cy.get('input[id="email"]').type(emailDuplicado);
-       cy.get('input[id="password"]').type(senha);
-       cy.get('button[data-testid="cadastrar"]').click();
+       cy.typeEmail(emailDuplicado);
+       cy.typePassword(senha);
+       cy.clickCadastrar();
 
        //Resultado Esperado: O sistema deve informar que “Este e-mail já está sendo usado”.
        cy.wait(3000);

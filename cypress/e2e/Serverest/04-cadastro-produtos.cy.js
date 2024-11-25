@@ -14,10 +14,10 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Produtos', () => {
 
        cy.visit('/cadastrarusuarios');
        cy.typeNome(nome);
-       cy.get('input[id="email"]').type(email);
-       cy.get('input[id="password"]').type(senha);
+       cy.typeEmail(email);
+       cy.typePassword(senha);
        cy.get('#administrador').check();
-       cy.get('button[data-testid="cadastrar"]').click();
+       cy.clickCadastrar();
        cy.wait(3000);
        cy.url().should('eq', `${Cypress.config('baseUrl')}/admin/home`);
        cy.get('button[data-testid="logout"]').click();
@@ -27,9 +27,9 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Produtos', () => {
        cy.wait(2000);
        cy.visit('/login');
        cy.wait(2000);
-       cy.get('input[id="email"]').type(email);
-       cy.get('input[id="password"]').type(senha);
-       cy.get('button[data-testid="entrar"]').click();
+       cy.typeEmail(email);
+       cy.typePassword(senha);
+       cy.clickEntrar();
        cy.wait(2000);
        cy.get('a[data-testid="cadastrar-produtos"]').click();
        cy.wait(1000);
@@ -43,12 +43,12 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Produtos', () => {
        const quantidade = faker.number.binary({min: 1, max: 1000});
 
        //Dados de entrada & Passo a Passo
-       cy.get('input[id="nome"]').type(nomeProduto);
-       cy.get('input[id="price"]').type(preco);
-       cy.get('textarea[id="description"]').type(descricao);
-       cy.get('input[id="quantity"]').type(quantidade);
+       cy.typeNome(nomeProduto); 
+       cy.typePreco(preco); 
+       cy.typeDescricao(descricao); 
+       cy.typeQuantidade(quantidade);
        cy.get('input[id="imagem"]').selectFile('cypress/fixtures/logo.jpg');
-       cy.get('button[data-testid="cadastarProdutos"]').click();
+       cy.clickCadastrarProduto();
 
        //Resultado Esperado
        cy.wait(3000);
@@ -78,11 +78,11 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Produtos', () => {
        const quantidade = faker.number.binary({min: 1, max: 1000});
 
        //Dados de entrada & Passo a Passo
-       cy.get('input[id="nome"]').type(nomeProduto);
-       cy.get('input[id="price"]').type(preco);
-       cy.get('textarea[id="description"]').type(descricao);
-       cy.get('input[id="quantity"]').type(quantidade);
-       cy.get('button[data-testid="cadastarProdutos"]').click();
+       cy.typeNome(nomeProduto);
+       cy.typePreco(preco); 
+       cy.typeDescricao(descricao);
+       cy.typeQuantidade(quantidade);
+       cy.clickCadastrarProduto();
 
        //Resultado Esperado: O sistema deve apresentar a mensagem: “O preço deve ser um número positivo”
        cy.wait(3000);
@@ -97,11 +97,11 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Produtos', () => {
        const quantidade = ('-50');
 
        //Dados de entrada & Passo a Passo
-       cy.get('input[id="nome"]').type(nomeProduto);
-       cy.get('input[id="price"]').type(preco);
-       cy.get('textarea[id="description"]').type(descricao);
-       cy.get('input[id="quantity"]').type(quantidade);
-       cy.get('button[data-testid="cadastarProdutos"]').click();
+       cy.typeNome(nomeProduto);
+       cy.typePreco(preco); 
+       cy.typeDescricao(descricao);
+       cy.typeQuantidade(quantidade);
+       cy.clickCadastrarProduto();
 
        //Resultado Esperado: O sistema deve apresentar a seguinte mensagem: “Quantidade deve ser maior ou igual a 0”
        cy.wait(3000);
@@ -116,11 +116,11 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Produtos', () => {
        const quantidade = faker.number.binary({min: 1, max: 1000});
 
        //// Pré-requisito: Cadastro Produto
-       cy.get('input[id="nome"]').type(nomeProduto);
-       cy.get('input[id="price"]').type(preco);
-       cy.get('textarea[id="description"]').type(descricao);
-       cy.get('input[id="quantity"]').type(quantidade);
-       cy.get('button[data-testid="cadastarProdutos"]').click();
+       cy.typeNome(nomeProduto);
+       cy.typePreco(preco);
+       cy.typeDescricao(descricao);
+       cy.typeQuantidade(quantidade);
+       cy.clickCadastrarProduto();
        cy.wait(3000);
        cy.url().should('eq', `${Cypress.config('baseUrl')}/admin/listarprodutos`);
        cy.wait(1000);
@@ -130,11 +130,11 @@ describe('Cenário: Verificar a funcionalidade do Cadastro de Produtos', () => {
        //Dados de entrada & Passo a Passo
        cy.get('a[data-testid="cadastrar-produtos"]').click();
        cy.wait(2000);
-       cy.get('input[id="nome"]').type(nomeProduto);
-       cy.get('input[id="price"]').type(preco);
-       cy.get('textarea[id="description"]').type(descricao);
-       cy.get('input[id="quantity"]').type(quantidade);
-       cy.get('button[data-testid="cadastarProdutos"]').click();
+       cy.typeNome(nomeProduto);
+       cy.typePreco(preco);
+       cy.typeDescricao(descricao);
+       cy.typeQuantidade(quantidade);
+       cy.clickCadastrarProduto();
 
        //Resultado Esperado: O sistema deve exibir um erro, informando que já existe um produto com esse nome.
        cy.wait(3000);
