@@ -14,9 +14,9 @@ describe('Cenário: Verificar a funcionalidade do Login', () => {
     
        cy.visit('/cadastrarusuarios');
        cy.typeNome(nome);
-       cy.get('input[id="email"]').type(email);
-       cy.get('input[id="password"]').type(senha);
-       cy.get('button[data-testid="cadastrar"]').click();
+       cy.typeEmail(email);
+       cy.typePassword(senha);
+       cy.clickCadastrar();
        cy.wait(3000);
        cy.url().should('eq', `${Cypress.config('baseUrl')}/home`);
        cy.get('button[data-testid="logout"]').click();
@@ -30,9 +30,9 @@ describe('Cenário: Verificar a funcionalidade do Login', () => {
     it('CT02-001 - Login com credenciais corretas', () => {
 
        //Dados de entrada & Passo a Passo
-       cy.get('input[id="email"]').type(email);
-       cy.get('input[id="password"]').type(senha);
-       cy.get('button[data-testid="entrar"]').click();
+       cy.typeEmail(email);
+       cy.typePassword(senha);
+       cy.clickEntrar();
 
        //Resultado Esperado: O usuário deve logar e ser direcionado para Home Page
        cy.wait(4000);
@@ -43,9 +43,9 @@ describe('Cenário: Verificar a funcionalidade do Login', () => {
        const senhainvalida = 'senhainvalida';
 
        //Dados de entrada & Passo a Passo
-       cy.get('input[id="email"]').type(email);
-       cy.get('input[id="password"]').type(senhainvalida);
-       cy.get('button[data-testid="entrar"]').click();
+       cy.typeEmail(email);
+       cy.typePassword(senhainvalida);
+       cy.clickEntrar();
 
        //Resultado Esperado: O sistema deve exibir uma mensagem indicando “Email e/ou senha inválidos”
        cy.wait(3000);
@@ -55,8 +55,8 @@ describe('Cenário: Verificar a funcionalidade do Login', () => {
    it('CT02-004 - Login com campo de e-mail vazio', () => {
 
        //Dados de entrada & Passo a Passo
-       cy.get('input[id="password"]').type(senha);
-       cy.get('button[data-testid="entrar"]').click();
+       cy.typePassword(senha);
+       cy.clickEntrar();
 
        //Resultado Esperado: O sistema deve exibir mensagem indicando “Email é obrigatório”
        cy.wait(3000);
@@ -66,8 +66,8 @@ describe('Cenário: Verificar a funcionalidade do Login', () => {
    it('CT02-005 - Login com campo de senha vazio', () => {
 
        //Dados de entrada & Passo a Passo
-       cy.get('input[id="email"]').type(email);
-       cy.get('button[data-testid="entrar"]').click();
+       cy.typeEmail(email);
+       cy.clickEntrar();
 
        //Resultado Esperado: O sistema deve exibir mensagem indicando “Password é obrigatório”
        cy.wait(3000);
@@ -78,9 +78,9 @@ describe('Cenário: Verificar a funcionalidade do Login', () => {
        const emailInvalido = 'emailinvalido@emailinvalido.com.br';
 
        //Dados de entrada & Passo a Passo
-       cy.get('input[id="email"]').type(emailInvalido);
-       cy.get('input[id="password"]').type(senha);
-       cy.get('button[data-testid="entrar"]').click();
+       cy.typeEmail(emailInvalido);
+       cy.typePassword(senha);
+       cy.clickEntrar();
 
        //Resultado Esperado: O sistema deve exibir mensagem indicando “Email e/ou senha inválidos”
        cy.wait(3000);
